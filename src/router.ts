@@ -55,5 +55,6 @@ function countView() {
 }
 window.addEventListener("load", countView);
 export function syncHash() {
+  countView();
   try { history.replaceState(null, "", "#" + encodeHash()); } catch { /* sandboxed frames may refuse */ }
 }
