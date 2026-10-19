@@ -123,7 +123,7 @@ const journeys = rows(wb, "Journeys").map((r) => {
 const glossary = rows(wb, "Glossary").map((r) => ({ term: r.term, definition: r.definition }));
 const ui = Object.fromEntries(rows(wb, "UI Text").map((r) => [r.key, r.text]));
 const changelog = rows(wb, "Changelog").map((r) => ({ version: r.version, date: r.date, change: r.change }));
-const openQuestions = rows(wb, "Open Questions").filter((r) => r.status !== "resolved").map((r) => ({ id: r.question_id, approachId: r.approach_id, question: r.question, why: r.why_it_matters }));
+const openQuestions = (wb.getWorksheet("Open Questions") ? rows(wb, "Open Questions") : []).filter((r) => r.status !== "resolved").map((r) => ({ id: r.question_id, approachId: r.approach_id, question: r.question, why: r.why_it_matters }));
 
 // glossary markup check
 const gl = new Set(glossary.map((g) => g.term.toLowerCase()));

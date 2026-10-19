@@ -98,5 +98,5 @@ export function renderSpectrum() {
 /* ---------- changelog ---------- */
 export function renderChangelog() {
   $("#log").innerHTML = D.changelog.map((c) => `<article><h3>Version ${esc(c.version)}</h3><p class="muted">${esc(c.date)}</p><p>${esc(c.change)}</p></article>`).join("") +
-    `<article><h3>Known gaps</h3><p class="muted">Facts that could not be verified as of ${esc(D.lastVerified)}.</p><ul class="plain-list">${D.openQuestions.map((q) => `<li>${q.approachId && AMAP[q.approachId] ? `<b>${esc(AMAP[q.approachId].name)}.</b> ` : ""}${esc(q.question)} <span class="muted">${esc(q.why)}</span></li>`).join("")}</ul></article>`;
+    (D.openQuestions.length ? `<article><h3>Known gaps</h3><p class="muted">Facts that could not be verified as of ${esc(D.lastVerified)}.</p><ul class="plain-list">${D.openQuestions.map((q) => `<li>${q.approachId && AMAP[q.approachId] ? `<b>${esc(AMAP[q.approachId].name)}.</b> ` : ""}${esc(q.question)} <span class="muted">${esc(q.why)}</span></li>`).join("")}</ul></article>` : "");
 }
