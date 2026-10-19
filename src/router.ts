@@ -41,6 +41,19 @@ export function parseHash() {
   if (p[0] === "compare" && p[1]) S.compare = p[1].split("-").filter((id) => AMAP[id]).slice(0, 3);
   if (p[0] === "stakeholders" && CAT[p[1]]) S.stake = p[1];
 }
+/** Page view for GoatCounter. Counts tab, approach, journey and stakeholder, not view or flow toggles. */
+let lastPath = "";
+function countView() {
+  const path = "/" + (S.tab === "explore" ? `explore/${S.approach}` : S.tab === "journeys" ? `journeys/${S.journey}` : S.tab === "stakeholders" ? `stakeholders/${S.stake}` : S.tab);
+  if (path === lastPath) return;
+  try {
+    const gc = (window as any).goatcounter;
+    if (!gc?.count) return; // script not loaded yet; the load handler below retries
+    gc.count({ path, title: path.slice(1) });
+    lastPath = path;
+  } catch { /* analytics must never break the page */ }
+}
+window.addEventListener("load", countView);
 export function syncHash() {
   try { history.replaceState(null, "", "#" + encodeHash()); } catch { /* sandboxed frames may refuse */ }
 }
