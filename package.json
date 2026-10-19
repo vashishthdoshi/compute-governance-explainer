@@ -1,0 +1,27 @@
+{
+  "name": "compute-stack-explorer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Explainer of how shared AI and HPC compute is owned, hosted, run, funded, governed and allocated.",
+  "license": "MIT",
+  "scripts": {
+    "data": "node scripts/build-data.mjs",
+    "dev": "npm run data && vite",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run data && tsc --noEmit && vite build",
+    "build:preview": "node scripts/build-data.mjs --inline-logos && vite build --mode preview",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource/carlito": "5.2.6",
+    "three": "0.170.0"
+  },
+  "devDependencies": {
+    "@types/three": "0.170.0",
+    "exceljs": "4.4.0",
+    "typescript": "5.8.3",
+    "vite": "6.3.5",
+    "vite-plugin-singlefile": "2.2.0"
+  }
+}
